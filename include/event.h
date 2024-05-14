@@ -1,15 +1,20 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
-class Level {
+/**
+ * Represents a game event.
+ */
+class Event {
     private:
         int id;
         std::string name;
         std::string prompt;
+        std::vector<int> events;
         
     public:
-        Level();
-        ~Level();
+        Event();
+        ~Event();
         
         int getId() const;
         void setId(int id);
@@ -19,4 +24,7 @@ class Level {
         
         std::string getPrompt() const;
         void setPrompt(const std::string& prompt);
+        
+        std::vector<int> getEvents();
+        void setEvents(const std::vector<int>& prompt);
 };

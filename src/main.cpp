@@ -1,5 +1,6 @@
 #include <iostream>
 #include "game_data.h"
+#include "game.h"
 #include <string>
 #include <csignal> 
 #include <cstdlib> 
@@ -15,7 +16,9 @@ int main() {
     std::signal(SIGINT, exitHandler);
     GameData gameData;
     gameData.load();
-    gameData.initLevels();
+    
+    Game game;
+    game.start();
     
     std::string option;
     

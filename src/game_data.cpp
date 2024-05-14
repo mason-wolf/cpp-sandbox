@@ -1,5 +1,4 @@
 #include "../include/game_data.h"
-#include "../include/level.h"
 #include "iostream"
 #include "fstream"
 #include "string"
@@ -7,6 +6,7 @@
 
 
 std::vector<std::string> GameData::data;
+std::vector<Event> GameData::events;
 /**
  * Handles comma-delimited file reading line by line.
  */
@@ -38,28 +38,29 @@ void GameData::load() {
     else {
         std::cerr << "Unable to open file.";
     }
+    init();
 }
 
 /**
- * Loads the levels from the game data.
+ * Load events from the game data.
  */
-void GameData::initLevels() {
-    std::cout << "Loading levels..." << std::endl;
+void GameData::init() {
     for (size_t i = 0; i < data.size(); i++) {
-        char delimiter = ',';
+        char delimiter = '|';
         std::vector<std::string> lines = splitString(data[i], delimiter);
         
-        std::string dType = lines[0];
+        // Create event from each line.
+        Event event;
+        event.setId(std::stoi(lines[1]));
+        event.setName(lines[2]);
+        event.setPrompt(lines[3]);
         
-        if (dType == "LEVEL") {
-            Level level;
-            level.setId(std::stoi(lines[1]));
-            level.setName(lines[2]);
-            std::cout << "Level Id: " << level.getId() <<
-                         " Name: " << level.getName() << std::endl;
+        // Get child events.
+        std::vector<std::string> eventIds = splitString(lines[4], ',');
+        for (auto& e : eventIds) {
+            std::cout << e;
         }
-        // for (auto& str: lines) {
-        //     std::cout << str << std::endl;
-        // }
+        events.push_back(event);
+        }
     }
-}
+
