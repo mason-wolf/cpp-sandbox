@@ -1,2 +1,2 @@
 LEVEL|1|town1|You arrive by carriage to a small village in the early hours, the fog is slowly dissipating amongst the trail. You hear the hooves rhythmically beating the ground, occasionally stepping in puddles and tossing bits of mud onto your face. The wind causes the trees to sway, oddly peacefully, yet your nerves are uneasy as you approach a destination unknown. The carriage suddenly stops, and rocks for a moment as if someone is climbing off.|2|
-ACTION|2|town1|Step off the carriage.|2,3|
+ACTION|2|town1_1|Step off the carriage.|2,3|

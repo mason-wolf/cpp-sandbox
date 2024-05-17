@@ -4,7 +4,6 @@
 #include "string"
 #include <sstream>
 
-
 std::vector<std::string> GameData::data;
 std::vector<Event> GameData::events;
 /**
@@ -38,7 +37,6 @@ void GameData::load() {
     else {
         std::cerr << "Unable to open file.";
     }
-    init();
 }
 
 /**
@@ -48,17 +46,15 @@ void GameData::init() {
     for (size_t i = 0; i < data.size(); i++) {
         char delimiter = '|';
         std::vector<std::string> lines = splitString(data[i], delimiter);
-        
         // Create event from each line.
         Event event;
         event.setId(std::stoi(lines[1]));
         event.setName(lines[2]);
         event.setPrompt(lines[3]);
-        
         // Get child events.
         std::vector<std::string> eventIds = splitString(lines[4], ',');
         for (auto& e : eventIds) {
-            std::cout << e;
+            std::cout << event.getName() << " DEST_ID: " << e << "\n";
         }
         events.push_back(event);
         }

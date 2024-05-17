@@ -14,9 +14,6 @@ void exitHandler(int signal) {
 
 int main() {
     std::signal(SIGINT, exitHandler);
-    GameData gameData;
-    gameData.load();
-    
     Game game;
     game.start();
     
