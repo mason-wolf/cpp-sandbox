@@ -35,11 +35,3 @@ std::vector<int> Event::getEventIds() {
 void Event::setEventIds(const std::vector<int>& events) {
     this->eventIds = events;
 }
-
-void Event::addEvent(const Event& event) {
-    this->events.push_back(event);
-}
-
-std::vector<Event> Event::getEvents() {
-    return events;
-}

@@ -1,3 +1,6 @@
+#ifndef EVENT_H
+#define EVENT_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,7 +14,6 @@ class Event {
         std::string name;
         std::string prompt;
         std::vector<int> eventIds;
-        std::vector<Event> events;
 
     public:
         Event();
@@ -28,7 +30,6 @@ class Event {
         
         std::vector<int> getEventIds();
         void setEventIds(const std::vector<int>& prompt);
-
-        std::vector<Event> getEvents();
-        void addEvent(const Event& event);
 };
+
+#endif

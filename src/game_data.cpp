@@ -2,10 +2,20 @@
 #include "iostream"
 #include "fstream"
 #include "string"
+#include <unordered_map>
 #include <sstream>
+#include <cstdlib> 
+#if defined(_WIN32) || defined(_WIN64)
+    #define CLEAR "CLS"
+#else
+    #define CLEAR "clear"
+#endif
 
 std::vector<std::string> GameData::data;
 std::vector<Event> GameData::events;
+std::unordered_map<int, int> eventOptions;
+int currentEvent = 0;
+
 /**
  * Handles comma-delimited file reading line by line.
  */
@@ -64,25 +74,51 @@ void GameData::init()
         std::vector<int> eventIdList;
         for (auto &e : eventIds)
         {
-            std::cout << e;
             eventIdList.push_back(std::stoi(e));
-          //  std::cout << event.getName() << " DEST_ID: " << e << " " << event.getPrompt() << "\n\n";
         }
         event.setEventIds(eventIdList);
         events.push_back(event);
     }
+    startEvent(0);
+}
 
-    for (auto &event : events)
+void GameData::startEvent(int eventId)
+{
+    system(CLEAR);
+    std::cout << "STARTING EVENT" << eventId;
+    eventOptions.clear();
+    currentEvent = eventId;
+    std::cout << "\n"
+              << events[eventId].getPrompt() << std::endl;
+    int choice = 1;
+    Event childEvent;
+    for (auto &e : events[eventId].getEventIds())
     {
-        for (int id : event.getEventIds())
+        childEvent = getEventById(e);
+        eventOptions[choice] = e;
+        std::cout << "\n"
+                  << choice << " " << childEvent.getPrompt();
+        choice++;
+    }
+}
+
+void GameData::startChildEvent(int childEventId) {
+    for (const auto &pair : eventOptions)
+    {
+        std::cout << pair.second;
+        if (pair.first == childEventId) {
+            startEvent(pair.second);
+        }
+    }
+}
+
+Event GameData::getEventById(int id)
+{
+    for (auto &e : events)
+    {
+        if (id == e.getId())
         {
-            std::cout << id;
-          //  std::cout << event.getName() << events[id].getId() << std::endl;
-            // if (id == events[id].getId())
-            // {
-            //     std::cout << id;
-            //     event.addEvent(event);
-            // }
+            return e;
         }
     }
 }

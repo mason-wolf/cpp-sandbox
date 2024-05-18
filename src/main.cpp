@@ -21,5 +21,8 @@ int main() {
     
     while(true) {
         std::cin >> option;
+        std::cout << option;
+        int optionInt = std::stoi(option);
+        game.loadNextEvent(optionInt);
     }
 }
