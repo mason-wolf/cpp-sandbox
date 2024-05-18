@@ -28,10 +28,18 @@ void Event::setPrompt(const std::string& prompt) {
     this->prompt = prompt;
 }
 
-std::vector<int> Event::getEvents() {
-    return events;
+std::vector<int> Event::getEventIds() {
+    return eventIds;
 }
 
-void Event::setEvents(const std::vector<int>& events) {
-    std::cout << "Setting events";
+void Event::setEventIds(const std::vector<int>& events) {
+    this->eventIds = events;
+}
+
+void Event::addEvent(const Event& event) {
+    this->events.push_back(event);
+}
+
+std::vector<Event> Event::getEvents() {
+    return events;
 }

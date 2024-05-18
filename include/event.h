@@ -10,8 +10,9 @@ class Event {
         int id;
         std::string name;
         std::string prompt;
-        std::vector<int> events;
-        
+        std::vector<int> eventIds;
+        std::vector<Event> events;
+
     public:
         Event();
         ~Event();
@@ -25,6 +26,9 @@ class Event {
         std::string getPrompt() const;
         void setPrompt(const std::string& prompt);
         
-        std::vector<int> getEvents();
-        void setEvents(const std::vector<int>& prompt);
+        std::vector<int> getEventIds();
+        void setEventIds(const std::vector<int>& prompt);
+
+        std::vector<Event> getEvents();
+        void addEvent(const Event& event);
 };
