@@ -2,38 +2,56 @@
  * Author: Mason Wolf
  * Date: May 18, 2024
  * https://github.com/mason-wolf/cpp-sandbox
- * 
+ *
  * A simple text-based game.
- * Failed project, but lots of lessons learned.
- * Some useful tidbits here include file IO, hashmaps, spliting strings.
- * Data structure in the game_data.txt just doesn't work correctly.
- * Should've thought it through better before writing all the parsing logic.
-*/
+ * Some useful tidbits here include file IO, hashmaps, splitting strings.
+ */
 #include <iostream>
 #include "game_data.h"
 #include "game.h"
 #include <string>
-#include <csignal> 
-#include <cstdlib> 
+#include <csignal>
+#include <cstdlib>
 
-void exitHandler(int signal) {
-    if (signal == SIGINT) {
-        std::cout << "Goodbye! Safe travels brave warrior." << std::endl;
+void exitHandler(int signal)
+{
+    if (signal == SIGINT)
+    {
+        std::cout << "Goodbye! Safe travels brave explorer." << std::endl;
         exit(EXIT_SUCCESS);
     }
 }
 
-int main() {
+int main()
+{
     std::signal(SIGINT, exitHandler);
     Game game;
     game.start();
-    
+
     std::string option;
-    
-    while(true) {
+
+    while (true)
+    {
         std::cin >> option;
-        std::cout << option;
-        int optionInt = std::stoi(option);
-        game.loadNextEvent(optionInt);
+
+        try
+        {
+            int optionInt = std::stoi(option);
+
+            int index = 1;
+            for (const auto &o : game.gameData.currentLevel.getOptions())
+            {
+                if (index == optionInt)
+                {
+                    game.gameData.loadLevel(std::stoi(o.second));
+                    break;
+                }
+                index++;
+            }
+        }
+        catch (const std::invalid_argument &)
+        {
+            std::cerr << "Invalid input." << std::endl;
+        }
     }
 }

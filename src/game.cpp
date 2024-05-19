@@ -4,18 +4,15 @@
 Game::Game() {}
 Game::~Game() {}
 
-void Game::start() {
+void Game::start()
+{
      GameData gameData;
      gameData.load();
      gameData.init();
      setGameData(gameData);
 }
 
-void Game::setGameData(GameData gameData) {
+void Game::setGameData(GameData gameData)
+{
      this->gameData = gameData;
 }
-
-void Game::loadNextEvent(int eventId) {
-     gameData.startChildEvent(eventId);
-}
-

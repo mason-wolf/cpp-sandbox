@@ -1,6 +1,3 @@
-LEVEL|1|town1_arrival|You arrive by carriage to a small village in the early hours, the fog is slowly dissipating amongst the trail. You hear the hooves rhythmically beating the ground, occasionally stepping in puddles and tossing bits of mud onto your face. The wind causes the trees to sway, oddly peacefully, yet your nerves are uneasy as you approach a destination unknown. The carriage suddenly stops, and rocks for a moment as if someone is climbing off.|2|
-ACTION|2|town1_arrival_1|Step off the carriage.|3|
-LEVEL|3|town1_front_entrance|The town is quiet. A couple of chickens cluck nearby. There's an inn; farmers tend to their lands across the fences ahead.|4,5|
-ACTION|4|town1_inn|Enter the inn.|6|
-ACTION|5|town1_explore|Walk around the area.|3|
-ACTION|6|town1_explore|Welcome to the inn!|3|
+level_id=1|option=Step off the carriage.,destination=2|prompt=You arrive by carriage to a small village in the early hours, the fog is slowly dissipating amongst the trail. You hear the hooves rhythmically beating the ground, occasionally stepping in puddles and tossing bits of mud onto your face. The wind causes the trees to sway, oddly peacefully, yet your nerves are uneasy as you approach a destination unknown. The carriage suddenly stops, and rocks for a moment as if someone is climbing off.
+level_id=2|option=Enter the inn.,destination=3|prompt=The town is quiet. A couple of chickens cluck nearby. There's an inn, and farmers tend to their lands across the fences ahead.
+level_id=3|option=opt1,destination=1|prompt=Welcome to the inn.
