@@ -1,9 +1,9 @@
 #include "../include/level.h"
-#include <unordered_map>
+#include <map>
 
 int id;
 std::string prompt;
-std::unordered_map<std::string, std::string> options;
+std::map<std::string, std::string> options;
 
 Level::Level() {}
 
@@ -34,7 +34,7 @@ void Level::addOption(std::string optionName, std::string destinationId)
     options[optionName] = destinationId;
 }
 
-std::unordered_map<std::string, std::string> Level::getOptions()
+std::map<std::string, std::string> Level::getOptions()
 {
     return options;
 }

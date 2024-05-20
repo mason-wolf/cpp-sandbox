@@ -4,14 +4,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
 
 class Level
 {
 private:
     int id;
     std::string prompt;
-    std::unordered_map<std::string, std::string> options;
+    std::map<std::string, std::string> options;
 
 public:
     Level();
@@ -21,7 +21,7 @@ public:
     std::string getPrompt();
     void setPrompt(std::string prompt);
     void addOption(std::string option, std::string destination);
-    std::unordered_map<std::string, std::string> getOptions();
+    std::map<std::string, std::string> getOptions();
 };
 
 #endif

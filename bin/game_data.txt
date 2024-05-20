@@ -1,3 +1,8 @@
 level_id=1|option=Step off the carriage.,destination=2|prompt=You arrive by carriage to a small village in the early hours, the fog is slowly dissipating amongst the trail. You hear the hooves rhythmically beating the ground, occasionally stepping in puddles and tossing bits of mud onto your face. The wind causes the trees to sway, oddly peacefully, yet your nerves are uneasy as you approach a destination unknown. The carriage suddenly stops, and rocks for a moment as if someone is climbing off.
-level_id=2|option=Enter the inn.,destination=3|prompt=The town is quiet. A couple of chickens cluck nearby. There's an inn, and farmers tend to their lands across the fences ahead.
-level_id=3|option=opt1,destination=1|prompt=Welcome to the inn.
+level_id=2|option=Enter the inn.,destination=3,option=Talk to the guard.,destination=4,option=Explore the town.,destination=7|prompt=The town is quiet. A couple of chickens cluck nearby. There's an inn, and farmers tend to their lands across the fences ahead.
+level_id=3|option=Talk to the bar keep.,destination=6|prompt=Welcome to the inn.
+level_id=4|option=Any work around here?,destination=5|prompt=Guard: What is it?
+level_id=5|option=Thanks. I'll think about it.,destination=2|prompt=Guard: Talk to the captain in the inn, join the King's army. We're always looking for new recruits.
+level_id=6|option=Any work around here?,destination=7|prompt=Bar Keep: Aye, you're a new face around here.
+level_id=7|option=Talk to the blacksmith.,destination=8|prompt=You hear a blacksmith rhythmically tapping metal.
+level_id=8|option=Thanks.,destination=9|prompt=Blacksmith: How fare ye?
