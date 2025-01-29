@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include "unit.h"
+
+std::vector<Unit> fill_line(int num);
+
+int main() 
+	int numInfantry = 10;
+	int numArchers = 9;
+	int numCalvary = 25;
+
+        std::vector<Unit> infantry = fill_line(numInfantry);
+
+	for (int i = 0; i < 4; i++) {
+		std::cout << " . ";
+		for (int j = 0; j < 75; j++) {
+			std::cout << " . ";
+		}
+		std::cout << "\n";
+	}
+}
+
+std::vector<Unit> fill_line(int num) {
+	std::vector<Unit> line;
+	
+	for (int i = 0; i < num; i++) {
+		Unit unit(0, i);
+		line.push_back(unit);
+	}
+	return line;
+}
