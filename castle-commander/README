@@ -1,25 +1,13 @@
 ### Castle Commander ###
 
 
-Idea 1:
+Gameplay Loop
 ======================================================================
 
 ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓		↓ = Archer  \u2193
 o o o o o o o o o o o		o = Infantry
 o o o o o o o o o o o		@ = Calvary
 @ @ @ @ @ @ @ @ @ @ @
-
-1. Order Line
-	1.1. Infantry o
-	1.2. Archers ↓
-	1.3. Calvary @
-		2. Attack
-			2.1 Enemy Infantry
-			2.2 Enemy Archers
-			2.3 Enemy Calvary
-
-Idea 2:
-=====================================================================
 
 1. Order Infantry Forward
 2. Order Archers to Fire
@@ -35,3 +23,9 @@ If infantry sent to archer lines, more effective.
 If calvary sent to archer lines, more effective.
 If calvary sent to infantry lines, more effective.
 
+Todos:
+======================================================================
+1. If one force is bigger than the other, calculate the largest row and
+center the smallest force to the largest row of its opponent.
+2. Add force counts.
+2. Add turned-based actions.

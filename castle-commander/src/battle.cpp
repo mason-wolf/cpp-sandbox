@@ -37,25 +37,43 @@ void set_offset(int offset) {
 	}
 }
 
-void Battle::build_formation(bool isPlayer, std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry) {
+void Battle::build_formation(bool isPlayer, 
+				std::vector<Unit> infantry, 
+				std::vector<Unit> archers, 
+				std::vector<Unit> cavalry) {
           int row  = 0;
           int offset = DEFAULT_ROW_OFFSET;
           bool infantrySet = false;
           bool archersSet = false;
           bool calvarySet = false;
 
-	 
+	// TODO: Simply logic into seperate methods.	 
         for (int i = 0; i < 3; i++) {
           if (row  == 0) {
+		if (isPlayer) {
+			int previousRowOffset = DEFAULT_ROW_OFFSET + ((cavalry.size() - archers.size()) / 2);
+			offset = previousRowOffset + ((archers.size() - infantry.size()) / 2);
+		}
                   set_offset(offset);
           }
           else if (row  == 1) {
-                  offset = offset + ((cavalry.size() - archers.size()) / 2);
+		if (isPlayer) {
+			offset = DEFAULT_ROW_OFFSET + ((cavalry.size() - archers.size()) / 2);
+		}
+		else {
+			offset = offset + ((cavalry.size() - archers.size()) / 2);
+		}
                   set_offset(offset);
           }
           else if (row  == 2) {
+		if (isPlayer) {
+			offset = DEFAULT_ROW_OFFSET;
+			set_offset(offset);
+		}
+		else {
                  offset = offset + ((archers.size() - infantry.size()) / 2);
                  set_offset(offset);
+		}
           }
           for (int j = 0; j < MAX_UNITS_PER_ROW; j++) {
                   populate_units(infantry, i, j);
