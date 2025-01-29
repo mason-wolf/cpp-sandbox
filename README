@@ -1,9 +1,9 @@
-Some experimental games written in C++. The goal is to build some re-usable modules
+Some experimental games and dev tools written in C++. The goal is to build some re-usable modules
 in the hopes of eventually making a complete CLI RPG.
 
-castle-commander: Demo of creating unit formations for a RTS game.
+castle-commander:	 Demo of creating unit formations for a RTS game.
 
-cpp-project-template: A getting started template to bootstrap pretty much
-		      any cpp app with common toolsets.
+cpp-project-template: 	 A getting started template to bootstrap pretty much
+		      	 any cpp program with common toolsets.
 
-dialog-tree: Demo of using dialog trees.
+dialog-tree: 		 Demo of using dialog trees.
