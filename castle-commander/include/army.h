@@ -10,6 +10,9 @@ public:
 	int get_num_infantry() const;
 	int get_num_archers() const;
 	int get_num_cavalry() const;
+
+	// TODO: Store units and change methods to refer
+	// to this class rather than vectors.
 private:
 	int infantry_;
 	int archers_;

@@ -4,8 +4,6 @@
 const int MAX_UNITS_PER_ROW = 80;
 const int DEFAULT_ROW_OFFSET = 25;
 
-void set_offset(int offset);
-
 std::vector<Unit> Battle::fill_line(int size, int row, UnitType unitType) {
 	std::vector<Unit> line;
 	for (int i = 0; i < size; i++) {
@@ -31,10 +29,41 @@ void Battle::populate_units(const std::vector<Unit>& units, int row, int col) {
 	}
 }
 
-void set_offset(int offset) {
+void Battle::set_offset(int offset) {
 	for (int i = 0; i < offset; i++) {
 		std::cout << " ";
 	}
+}
+
+int Battle::convert_unit_type_to_row(UnitType unitType) {
+	switch(unitType) {
+		case INFANTRY:
+			return 2;
+		case ARCHERS:
+			return 1;
+		case CALVARY:
+			return 0;
+		default:
+			return -1;
+	}
+}
+
+UnitType Battle::calculate_largest_group(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry) {
+	UnitType largestGroup = INFANTRY;
+	
+	size_t infantrySize = infantry.size();
+	size_t archersSize = archers.size();
+	size_t cavalrySize = cavalry.size();
+
+	if (archersSize > infantrySize && archersSize > cavalrySize) {
+		largestGroup = ARCHERS;
+	} else if (cavalrySize > infantrySize && cavalrySize > archersSize) {
+		largestGroup = CALVARY;
+	} else if (infantrySize >= archersSize && infantrySize >= cavalrySize) {
+		largestGroup = INFANTRY;
+	}
+	
+	return largestGroup;
 }
 
 void Battle::build_formation(bool isPlayer, 
@@ -46,8 +75,11 @@ void Battle::build_formation(bool isPlayer,
           bool infantrySet = false;
           bool archersSet = false;
           bool calvarySet = false;
+	
+	// Create private class variable to store the largest formation.
+	// We want to center the smallest formation between the larger force.
+	// TODO: Simply logic into seperate methods.
 
-	// TODO: Simply logic into seperate methods.	 
         for (int i = 0; i < 3; i++) {
           if (row  == 0) {
 		if (isPlayer) {
@@ -64,7 +96,7 @@ void Battle::build_formation(bool isPlayer,
 			offset = offset + ((cavalry.size() - archers.size()) / 2);
 		}
                   set_offset(offset);
-          }
+          } 
           else if (row  == 2) {
 		if (isPlayer) {
 			offset = DEFAULT_ROW_OFFSET;

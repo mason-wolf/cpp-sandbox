@@ -7,9 +7,9 @@
 
 int main() {	
 	Army playerArmy;
-	playerArmy.set_num_infantry(80);
-	playerArmy.set_num_archers(80);
-	playerArmy.set_num_cavalry(80);
+	playerArmy.set_num_infantry(8);
+	playerArmy.set_num_archers(8);
+	playerArmy.set_num_cavalry(8);
 
 	Army opponentArmy;
 	opponentArmy.set_num_infantry(80);
