@@ -29,3 +29,75 @@ Todos:
 center the smallest force to the largest row of its opponent.
 2. Add force counts.
 2. Add turned-based actions.
+
+
+Table of Contents
+==========================================================================
+Section	Title			Shortcut	% Complete
+1.	Battle Mechanics	[01BATTLE]	25%
+5.	Traveling		[05TRAVEL]	0%	
+
+1. Battle Start	[01BATTLE]
+
+	@@@@@@@@@
+	|||||||||
+	ooooooooo
+
+2. Opponent Turn
+	2.1 	Orders cavalry charge.
+	
+	|||||||||
+	ooooooooo
+	@@@@@@@@@
+
+	2.2 	Cavalry attacks player's front lines.
+			2.3 Unit vs. Unit effectivness check.
+
+3. Player Turn
+
+	oo o o oo
+	| |||| ||
+	@@@@@@@@@
+
+	3.1 	Player has infantry on the front line
+		and loses units due to weakness from cavalry.
+
+	3.2	Player must use effective unit against cavalry.
+
+	| |||| ||
+	oo o o oo
+	@@@@@@@@@
+
+	3.3	Player order infantry foward and attacks.
+			3.4 Infantry vs. Cavalry effectiveness check.
+
+4. Return to Step 1.
+
+Misc. Notes
+==========================================================================
+	- 	Unit effectiveness is determined by training, morale, 
+		equipment and weather.
+
+	-	Player may accumulate larger armies depending on experience,
+		battles won, and relationships with leadership and communities.
+
+	-	Player recieves assignemnts from garrison commander. Commander
+		will promote player based upon performance. Assignments received
+		permit player to travel.
+	
+
+5.	Travel Mode [05TRAVEL]
+	
+	5.1	Player recieves assignment from commander and proceeds to that
+		area.
+
+		5.1.1	Assignment Types
+			
+			5.1.2	Patrol
+			5.1.3	Attack
+			5.1.4	Obtain
+
+		5.2.1	Rewards
+
+			5.2.2	XP gain.
+			5.2.3	Max troop increase.
