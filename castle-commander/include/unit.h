@@ -1,14 +1,14 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-enum UnitType { INFANTRY, ARCHERS, CALVARY };
+enum UnitType { INFANTRY, ARCHERS, CAVALRY };
 
 class Unit {
 public:
 	Unit(int row, int col, UnitType type);
-	int get_row() const;
-	int get_col() const;
-	UnitType get_type() const;
+	int GetRow() const;
+	int GetCol() const;
+	UnitType GetType() const;
 
 private:
 	int row_;

@@ -1,25 +1,25 @@
 #include "army.h"
 
-void Army::set_num_infantry(int num) {
+void Army::SetNumInfantry(int num) {
 	infantry_ = num;
 }
 
-void Army::set_num_cavalry(int num) {
+void Army::SetNumCavalry(int num) {
 	cavalry_ = num;
 }
 
-void Army::set_num_archers(int num) {
+void Army::SetNumArchers(int num) {
 	archers_ = num;
 }
 
-int Army::get_num_infantry() const {
+int Army::GetNumInfantry() const {
 	return infantry_;
 }
 
-int Army::get_num_archers() const {
+int Army::GetNumArchers() const {
 	return archers_;
 }
 
-int Army::get_num_cavalry() const {
+int Army::GetNumCavalry() const {
 	return cavalry_;
 }

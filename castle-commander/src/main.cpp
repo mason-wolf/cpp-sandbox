@@ -7,24 +7,24 @@
 
 int main() {	
 	Army playerArmy;
-	playerArmy.set_num_infantry(8);
-	playerArmy.set_num_archers(8);
-	playerArmy.set_num_cavalry(8);
+	playerArmy.SetNumInfantry(8);
+	playerArmy.SetNumArchers(8);
+	playerArmy.SetNumCavalry(8);
 
 	Army opponentArmy;
-	opponentArmy.set_num_infantry(80);
-	opponentArmy.set_num_archers(80);
-	opponentArmy.set_num_cavalry(80);
+	opponentArmy.SetNumInfantry(80);
+	opponentArmy.SetNumArchers(80);
+	opponentArmy.SetNumCavalry(80);
 	
 	Commander player;
-	player.set_army(playerArmy);
+	player.SetArmy(playerArmy);
 	
 	Commander opponent;
-	opponent.set_army(opponentArmy);
+	opponent.SetArmy(opponentArmy);
 	
 	Battle battle;
-	battle.set_player(player);
-	battle.set_opponent(opponent);
-	battle.start();
+	battle.SetPlayer(player);
+	battle.SetOpponent(opponent);
+	battle.Start();
 }
 

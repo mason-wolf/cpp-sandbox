@@ -5,10 +5,10 @@
 
 class Commander {
 public:
-	bool is_player() const;
-	void set_player(bool isPlayer);
-	Army get_army();
-	void set_army(Army army);
+	bool IsPlayer() const;
+	void SetPlayer(bool isPlayer);
+	Army GetArmy();
+	void SetArmy(Army army);
 private:
 	Army army_;
 	bool isPlayer_;

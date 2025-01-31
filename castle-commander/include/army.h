@@ -3,13 +3,13 @@
 
 class Army {
 public:
-	void set_num_infantry(int num);
-	void set_num_cavalry(int num);
-	void set_num_archers(int num);
+	void SetNumInfantry(int num);
+	void SetNumCavalry(int num);
+	void SetNumArchers(int num);
 
-	int get_num_infantry() const;
-	int get_num_archers() const;
-	int get_num_cavalry() const;
+	int GetNumInfantry() const;
+	int GetNumArchers() const;
+	int GetNumCavalry() const;
 
 	// TODO: Store units and change methods to refer
 	// to this class rather than vectors.

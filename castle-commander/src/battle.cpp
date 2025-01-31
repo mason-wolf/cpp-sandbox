@@ -4,7 +4,7 @@
 const int MAX_UNITS_PER_ROW = 80;
 const int DEFAULT_ROW_OFFSET = 25;
 
-std::vector<Unit> Battle::fill_line(int size, int row, UnitType unitType) {
+std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 	std::vector<Unit> line;
 	for (int i = 0; i < size; i++) {
 		Unit unit(row, i, unitType);
@@ -13,42 +13,42 @@ std::vector<Unit> Battle::fill_line(int size, int row, UnitType unitType) {
 	return line;
 }
 
-void Battle::populate_units(const std::vector<Unit>& units, int row, int col) {
+void Battle::PopulateUnits(const std::vector<Unit>& units, int row, int col) {
 	for (auto i = 0U; i < units.size(); i++) {
-		if(units[i].get_row() == row && units[i].get_col() == col) {
-			if (units[i].get_type() == INFANTRY) {
+		if(units[i].GetRow() == row && units[i].GetCol() == col) {
+			if (units[i].GetType() == INFANTRY) {
 				std::cout << "o";
 			}
-			else if (units[i].get_type() == ARCHERS) {
+			else if (units[i].GetType() == ARCHERS) {
 				std::cout << "\u2193";
 			}
-			else if (units[i].get_type() == CALVARY) {
+			else if (units[i].GetType() == CAVALRY) {
 				std::cout << "@";
 			}
 		}
 	}
 }
 
-void Battle::set_offset(int offset) {
+void Battle::SetOffset(int offset) {
 	for (int i = 0; i < offset; i++) {
 		std::cout << " ";
 	}
 }
 
-int Battle::convert_unit_type_to_row(UnitType unitType) {
+int Battle::ConvertUnitTypeToRow(UnitType unitType) {
 	switch(unitType) {
 		case INFANTRY:
 			return 2;
 		case ARCHERS:
 			return 1;
-		case CALVARY:
+		case CAVALRY:
 			return 0;
 		default:
 			return -1;
 	}
 }
 
-UnitType Battle::calculate_largest_group(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry) {
+UnitType Battle::CalculateLargestGroup(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry) {
 	UnitType largestGroup = INFANTRY;
 	
 	size_t infantrySize = infantry.size();
@@ -58,7 +58,7 @@ UnitType Battle::calculate_largest_group(std::vector<Unit> infantry, std::vector
 	if (archersSize > infantrySize && archersSize > cavalrySize) {
 		largestGroup = ARCHERS;
 	} else if (cavalrySize > infantrySize && cavalrySize > archersSize) {
-		largestGroup = CALVARY;
+		largestGroup = CAVALRY;
 	} else if (infantrySize >= archersSize && infantrySize >= cavalrySize) {
 		largestGroup = INFANTRY;
 	}
@@ -66,16 +66,12 @@ UnitType Battle::calculate_largest_group(std::vector<Unit> infantry, std::vector
 	return largestGroup;
 }
 
-void Battle::build_formation(bool isPlayer, 
+void Battle::BuildFormation(bool isPlayer, 
 				std::vector<Unit> infantry, 
 				std::vector<Unit> archers, 
 				std::vector<Unit> cavalry) {
           int row  = 0;
           int offset = DEFAULT_ROW_OFFSET;
-          bool infantrySet = false;
-          bool archersSet = false;
-          bool calvarySet = false;
-	
 	// Create private class variable to store the largest formation.
 	// We want to center the smallest formation between the larger force.
 	// TODO: Simply logic into seperate methods.
@@ -86,7 +82,7 @@ void Battle::build_formation(bool isPlayer,
 			int previousRowOffset = DEFAULT_ROW_OFFSET + ((cavalry.size() - archers.size()) / 2);
 			offset = previousRowOffset + ((archers.size() - infantry.size()) / 2);
 		}
-                  set_offset(offset);
+                  SetOffset(offset);
           }
           else if (row  == 1) {
 		if (isPlayer) {
@@ -95,62 +91,62 @@ void Battle::build_formation(bool isPlayer,
 		else {
 			offset = offset + ((cavalry.size() - archers.size()) / 2);
 		}
-                  set_offset(offset);
+                  SetOffset(offset);
           } 
           else if (row  == 2) {
 		if (isPlayer) {
 			offset = DEFAULT_ROW_OFFSET;
-			set_offset(offset);
+			SetOffset(offset);
 		}
 		else {
                  offset = offset + ((archers.size() - infantry.size()) / 2);
-                 set_offset(offset);
+                 SetOffset(offset);
 		}
           }
           for (int j = 0; j < MAX_UNITS_PER_ROW; j++) {
-                  populate_units(infantry, i, j);
-                  populate_units(archers, i, j);
-                  populate_units(cavalry, i, j);
+                  PopulateUnits(infantry, i, j);
+                  PopulateUnits(archers, i, j);
+                  PopulateUnits(cavalry, i, j);
           }
           row++;
          std::cout << std::endl;
       }
 }
 
-void Battle::start() {
-	int numOppInfantry = get_opponent().get_army().get_num_infantry();
-	std::vector<Unit> oppInfantry = fill_line(numOppInfantry, 2, INFANTRY);	
-	int numOppArchers = get_opponent().get_army().get_num_archers();
-	std::vector<Unit> oppArchers = fill_line(numOppArchers, 1, ARCHERS);
-	int numOppCavalry = get_opponent().get_army().get_num_cavalry();
-	std::vector<Unit> oppCavalry = fill_line(numOppCavalry, 0, CALVARY);
+void Battle::Start() {
+	int numOppInfantry = GetOpponent().GetArmy().GetNumInfantry();
+	std::vector<Unit> oppInfantry = FillLine(numOppInfantry, 2, INFANTRY);	
+	int numOppArchers = GetOpponent().GetArmy().GetNumArchers();
+	std::vector<Unit> oppArchers = FillLine(numOppArchers, 1, ARCHERS);
+	int numOppCavalry = GetOpponent().GetArmy().GetNumCavalry();
+	std::vector<Unit> oppCavalry = FillLine(numOppCavalry, 0, CAVALRY);
 
-	build_formation(false, oppInfantry, oppArchers, oppCavalry);
+	BuildFormation(false, oppInfantry, oppArchers, oppCavalry);
 
-	int numPlayerInfantry = get_player().get_army().get_num_infantry();
-	std::vector<Unit> playerInfantry = fill_line(numPlayerInfantry, 0, INFANTRY);
-	int numPlayerArchers = get_player().get_army().get_num_archers();
-	std::vector<Unit> playerArchers = fill_line(numPlayerArchers, 1, ARCHERS);
-	int numPlayerCavalry = get_player().get_army().get_num_cavalry();
-	std::vector<Unit> playerCavalry = fill_line(numPlayerCavalry, 2, CALVARY);
+	int numPlayerInfantry = GetPlayer().GetArmy().GetNumInfantry();
+	std::vector<Unit> playerInfantry = FillLine(numPlayerInfantry, 0, INFANTRY);
+	int numPlayerArchers = GetPlayer().GetArmy().GetNumArchers();
+	std::vector<Unit> playerArchers = FillLine(numPlayerArchers, 1, ARCHERS);
+	int numPlayerCavalry = GetPlayer().GetArmy().GetNumCavalry();
+	std::vector<Unit> playerCavalry = FillLine(numPlayerCavalry, 2, CAVALRY);
 	
 	std::cout << std::endl << std::endl;
-	build_formation(true, playerInfantry, playerArchers, playerCavalry);
+	BuildFormation(true, playerInfantry, playerArchers, playerCavalry);
 }
 
-Commander Battle::get_player() const {
+Commander Battle::GetPlayer() const {
 	return player_;
 }
 
-void Battle::set_player(const Commander& player) {
+void Battle::SetPlayer(const Commander& player) {
 	player_ = player;
 }
 
-void  Battle::set_opponent(const Commander& opponent) {
+void  Battle::SetOpponent(const Commander& opponent) {
 	opponent_ = opponent;
 }
 
-Commander Battle::get_opponent() const {
+Commander Battle::GetOpponent() const {
 	return opponent_;
 }
 

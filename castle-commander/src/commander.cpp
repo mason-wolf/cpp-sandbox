@@ -1,17 +1,17 @@
 #include "commander.h"
 
-bool Commander::is_player() const {
+bool Commander::IsPlayer() const {
 	return isPlayer_;
 }
 
-void Commander::set_player(bool isPlayer) {
+void Commander::SetPlayer(bool isPlayer) {
 	isPlayer_ = isPlayer;
 }
 
-Army Commander::get_army() {
+Army Commander::GetArmy() {
 	return army_;
 }
 
-void Commander::set_army(Army army) {
+void Commander::SetArmy(Army army) {
 	army_ = army;
 }
