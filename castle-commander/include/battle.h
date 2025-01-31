@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <array>
 #include "unit.h"
 #include "commander.h"
 
@@ -26,11 +27,13 @@ public:
 	Calculates the largest unit group for formation sizing.
 	Ensures the formations are properly formed in front of each other.
 	**/
-	UnitType CalculateLargestGroup(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry);
+	std::array<int, 2> CalculateLargestGroup(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry);
 	// Assigns the player commander to the battle.
 	void SetPlayer(const Commander& player);
 	// Assigns the opponent commander to the battle.
 	void SetOpponent(const Commander& opponent);
+	std::array<int, 2> GetPlayerForceOffset() const;
+	std::array<int, 2> GetOpponentForceOffset() const;
 	// Starts the battle.
 	void Start();
 	Commander GetPlayer() const;
@@ -40,6 +43,8 @@ public:
 private:
 	Commander player_;
 	Commander opponent_;
+	std::array<int, 2> playerForceOffset_ = {0, 0};
+	std::array<int, 2> opponentForceOffset_ = {0, 0};
 };
 
 #endif 

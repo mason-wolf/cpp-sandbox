@@ -1,8 +1,9 @@
 
 #include "battle.h"
+#include <cstdlib>
 
 const int MAX_UNITS_PER_ROW = 80;
-const int DEFAULT_ROW_OFFSET = 25;
+int DEFAULT_ROW_OFFSET = 25;
 
 std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 	std::vector<Unit> line;
@@ -48,22 +49,42 @@ int Battle::ConvertUnitTypeToRow(UnitType unitType) {
 	}
 }
 
-UnitType Battle::CalculateLargestGroup(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry) {
+void ClearScreen() {
+	#ifdef _WIN32
+		system("cls");
+	#else
+		system("clear");
+	#endif
+}
+
+std::array<int, 2> Battle::CalculateLargestGroup(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry) {
 	UnitType largestGroup = INFANTRY;
-	
+	size_t unitCount = 0;
 	size_t infantrySize = infantry.size();
 	size_t archersSize = archers.size();
 	size_t cavalrySize = cavalry.size();
 
 	if (archersSize > infantrySize && archersSize > cavalrySize) {
 		largestGroup = ARCHERS;
+		unitCount = archersSize;
 	} else if (cavalrySize > infantrySize && cavalrySize > archersSize) {
 		largestGroup = CAVALRY;
+		unitCount = cavalrySize;
 	} else if (infantrySize >= archersSize && infantrySize >= cavalrySize) {
 		largestGroup = INFANTRY;
+		unitCount = infantrySize;
 	}
 	
-	return largestGroup;
+	int unitRow = ConvertUnitTypeToRow(largestGroup);
+	return { static_cast<int>(unitRow), static_cast<int>(unitCount) };
+}
+
+std::array<int, 2> Battle::GetOpponentForceOffset() const {
+	return this->opponentForceOffset_;
+}
+
+std::array<int, 2> Battle::GetPlayerForceOffset() const {
+	return this->playerForceOffset_;
 }
 
 void Battle::BuildFormation(bool isPlayer, 
@@ -72,9 +93,16 @@ void Battle::BuildFormation(bool isPlayer,
 				std::vector<Unit> cavalry) {
           int row  = 0;
           int offset = DEFAULT_ROW_OFFSET;
-	// Create private class variable to store the largest formation.
-	// We want to center the smallest formation between the larger force.
-	// TODO: Simply logic into seperate methods.
+
+	int opponentForceOffset = GetOpponentForceOffset()[1];
+	int playerForceOffset = GetPlayerForceOffset()[1];
+	
+	if (isPlayer && (opponentForceOffset > playerForceOffset)) {
+		DEFAULT_ROW_OFFSET  = DEFAULT_ROW_OFFSET + (opponentForceOffset / 4) -(playerForceOffset / 4);
+	}
+	else if (!isPlayer && (opponentForceOffset < playerForceOffset)) {
+		DEFAULT_ROW_OFFSET = DEFAULT_ROW_OFFSET + (playerForceOffset / 4) - (opponentForceOffset / 4);
+	}
 
         for (int i = 0; i < 3; i++) {
           if (row  == 0) {
@@ -114,14 +142,13 @@ void Battle::BuildFormation(bool isPlayer,
 }
 
 void Battle::Start() {
+	ClearScreen();
 	int numOppInfantry = GetOpponent().GetArmy().GetNumInfantry();
 	std::vector<Unit> oppInfantry = FillLine(numOppInfantry, 2, INFANTRY);	
 	int numOppArchers = GetOpponent().GetArmy().GetNumArchers();
 	std::vector<Unit> oppArchers = FillLine(numOppArchers, 1, ARCHERS);
 	int numOppCavalry = GetOpponent().GetArmy().GetNumCavalry();
 	std::vector<Unit> oppCavalry = FillLine(numOppCavalry, 0, CAVALRY);
-
-	BuildFormation(false, oppInfantry, oppArchers, oppCavalry);
 
 	int numPlayerInfantry = GetPlayer().GetArmy().GetNumInfantry();
 	std::vector<Unit> playerInfantry = FillLine(numPlayerInfantry, 0, INFANTRY);
@@ -130,6 +157,9 @@ void Battle::Start() {
 	int numPlayerCavalry = GetPlayer().GetArmy().GetNumCavalry();
 	std::vector<Unit> playerCavalry = FillLine(numPlayerCavalry, 2, CAVALRY);
 	
+	this->opponentForceOffset_ = CalculateLargestGroup(oppInfantry, oppArchers, oppCavalry);
+	this->playerForceOffset_ = CalculateLargestGroup(playerInfantry, playerArchers, playerCavalry);
+	BuildFormation(false, oppInfantry, oppArchers, oppCavalry);
 	std::cout << std::endl << std::endl;
 	BuildFormation(true, playerInfantry, playerArchers, playerCavalry);
 }
