@@ -4,12 +4,17 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <memory>
+#include <string>
+#include <unordered_map>
+
 #include "unit.h"
 #include "commander.h"
 #include "order.h"
 
 class Battle {
 public:
+	Battle();
 	/**
 	Populates a row of units depending on unit type.
 	Responsible for ASCII and unit placement.
@@ -54,6 +59,7 @@ private:
 	Commander opponent_;
 	std::array<int, 2> playerForceOffset_ = {0, 0};
 	std::array<int, 2> opponentForceOffset_ = {0, 0};
+	std::unordered_map<int, std::unique_ptr<Order>> orderMap;
 };
 
 #endif 

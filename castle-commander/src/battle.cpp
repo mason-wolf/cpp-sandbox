@@ -2,11 +2,18 @@
 #include "battle.h"
 #include <cstdlib>
 #include <string>
+#include <iostream>
+#include <stdexcept>
+#include <memory>
 #include "auto_battle_order.h"
 
 const int MAX_UNITS_PER_ROW = 80;
 int DEFAULT_ROW_OFFSET = 25;
 int playerActiveRow = 0;
+
+Battle::Battle() {
+	orderMap[1] = std::unique_ptr<Order>(new AutoBattleOrder());
+}
 
 std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 	std::vector<Unit> line;
@@ -20,8 +27,6 @@ std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 void Battle::HandleCommand() {
 	std::string userInput;
 	
-	Order* order = nullptr;
-
 	while(true) {
 		std::cout << "1. Auto Battle" << std::endl; 
 		std::cout << "2. Order Infantry Forward" << std::endl;
@@ -30,14 +35,21 @@ void Battle::HandleCommand() {
 		std::cout << "5. Retreat" << std::endl;
 		std::cout << "> ";
 		std::getline(std::cin, userInput);
-		std::cout << userInput;
-		order = new AutoBattleOrder();
-		//std::cout << GetOpponent().GetArmy().GetInfantry().size();
-		if (order) {
-			ExecuteOrder(order);
-			delete order;
-			std::getline(std::cin, userInput);
+
+		try {
+
+			int order = std::stoi(userInput);
+			auto it = orderMap.find(order);
+			if (it != orderMap.end()) {
+			it->second->Execute();
+			}
+			else {
+				std::cout << "Invalid command.\n";
+			}
+		} catch(const std::invalid_argument& e) {
+			std::cout << "Invalid input.";
 		}
+		std::getline(std::cin, userInput);
 		DEFAULT_ROW_OFFSET = 25;
 		Start();
 	}
