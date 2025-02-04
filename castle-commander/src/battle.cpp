@@ -2,6 +2,7 @@
 #include "battle.h"
 #include <cstdlib>
 #include <string>
+#include "auto_battle_order.h"
 
 const int MAX_UNITS_PER_ROW = 80;
 int DEFAULT_ROW_OFFSET = 25;
@@ -18,6 +19,8 @@ std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 
 void Battle::HandleCommand() {
 	std::string userInput;
+	
+	Order* order = nullptr;
 
 	while(true) {
 		std::cout << "1. Auto Battle" << std::endl; 
@@ -28,10 +31,20 @@ void Battle::HandleCommand() {
 		std::cout << "> ";
 		std::getline(std::cin, userInput);
 		std::cout << userInput;
-		std::cout << GetOpponent().GetArmy().GetInfantry().size();
+		order = new AutoBattleOrder();
+		//std::cout << GetOpponent().GetArmy().GetInfantry().size();
+		if (order) {
+			ExecuteOrder(order);
+			delete order;
+			std::getline(std::cin, userInput);
+		}
 		DEFAULT_ROW_OFFSET = 25;
 		Start();
 	}
+}
+
+void Battle::ExecuteOrder(Order* order) {
+	order->Execute();
 }
 
 void Battle::PopulateUnits(const std::vector<Unit>& units, int row, int col) {

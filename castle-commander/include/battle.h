@@ -6,6 +6,7 @@
 #include <array>
 #include "unit.h"
 #include "commander.h"
+#include "order.h"
 
 class Battle {
 public:
@@ -28,19 +29,26 @@ public:
 	Ensures the formations are properly formed in front of each other.
 	**/
 	std::array<int, 2> CalculateLargestGroup(std::vector<Unit> infantry, std::vector<Unit> archers, std::vector<Unit> cavalry);
+
 	// Assigns the player commander to the battle.
 	void SetPlayer(const Commander& player);
 	// Assigns the opponent commander to the battle.
 	void SetOpponent(const Commander& opponent);
+
 	std::array<int, 2> GetPlayerForceOffset() const;
 	std::array<int, 2> GetOpponentForceOffset() const;
+
 	// Starts the battle.
 	void Start();
+
 	Commander GetPlayer() const;
 	Commander GetOpponent() const;
+
   	void SetOffset(int offset);
   	int ConvertUnitTypeToRow(UnitType unitType);
 	void HandleCommand();
+
+	void ExecuteOrder(Order* order);
 private:
 	Commander player_;
 	Commander opponent_;
