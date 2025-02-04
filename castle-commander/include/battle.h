@@ -40,6 +40,7 @@ public:
 	Commander GetOpponent() const;
   	void SetOffset(int offset);
   	int ConvertUnitTypeToRow(UnitType unitType);
+	void HandleCommand();
 private:
 	Commander player_;
 	Commander opponent_;

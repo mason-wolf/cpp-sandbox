@@ -7,10 +7,13 @@ class Commander {
 public:
 	bool IsPlayer() const;
 	void SetPlayer(bool isPlayer);
-	Army GetArmy();
-	void SetArmy(Army army);
+
+	Army& GetArmy();
+	const Army& GetArmy() const;
+
+	void SetArmy(Army& army);
 private:
-	Army army_;
+	Army* army_;
 	bool isPlayer_;
 };
 

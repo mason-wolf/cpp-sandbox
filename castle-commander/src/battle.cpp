@@ -1,9 +1,11 @@
 
 #include "battle.h"
 #include <cstdlib>
+#include <string>
 
 const int MAX_UNITS_PER_ROW = 80;
 int DEFAULT_ROW_OFFSET = 25;
+int playerActiveRow = 0;
 
 std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 	std::vector<Unit> line;
@@ -14,17 +16,50 @@ std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 	return line;
 }
 
+void Battle::HandleCommand() {
+	std::string userInput;
+
+	while(true) {
+		std::cout << "1. Auto Battle" << std::endl; 
+		std::cout << "2. Order Infantry Forward" << std::endl;
+		std::cout << "3. Order Archers Forward" << std::endl;
+		std::cout << "4. Order Cavalry Forward" << std::endl;
+		std::cout << "5. Retreat" << std::endl;
+		std::cout << "> ";
+		std::getline(std::cin, userInput);
+		std::cout << userInput;
+		std::cout << GetOpponent().GetArmy().GetInfantry().size();
+		DEFAULT_ROW_OFFSET = 25;
+		Start();
+	}
+}
+
 void Battle::PopulateUnits(const std::vector<Unit>& units, int row, int col) {
 	for (auto i = 0U; i < units.size(); i++) {
 		if(units[i].GetRow() == row && units[i].GetCol() == col) {
 			if (units[i].GetType() == INFANTRY) {
-				std::cout << "o";
+				if (units[i].IsHostile()) {
+					std::cout << "\033[1;31m" << "o" << "\033[0m";
+				}
+				else {
+				std::cout << "\033[1;32m" << "o" << "\033[0m";
+				}
 			}
 			else if (units[i].GetType() == ARCHERS) {
-				std::cout << "\u2193";
+				if (units[i].IsHostile()) {
+					std::cout << "\033[1;31m" << "\u2193" << "\33[0m";
+				}
+				else {
+					std::cout << "\033[1;32m" << "\u2193" << "\033[0m";
+				}
 			}
 			else if (units[i].GetType() == CAVALRY) {
-				std::cout << "@";
+				if  (units[i].IsHostile()) {
+					std::cout << "\033[1;31m" << "@" << "\33[0m";
+				}
+				else {
+					std::cout << "\033[1;32m" << "@" << "\033[0m";
+				}
 			}
 		}
 	}
@@ -150,6 +185,20 @@ void Battle::Start() {
 	int numOppCavalry = GetOpponent().GetArmy().GetNumCavalry();
 	std::vector<Unit> oppCavalry = FillLine(numOppCavalry, 0, CAVALRY);
 
+	for (auto &unit : oppInfantry) {
+		unit.SetHostile(true);
+	}
+
+	for (auto &unit : oppArchers) {
+		unit.SetHostile(true);
+	}
+
+	for (auto &unit : oppCavalry) {
+		unit.SetHostile(true);
+	}
+
+	GetOpponent().GetArmy().SetInfantry(oppInfantry);
+
 	int numPlayerInfantry = GetPlayer().GetArmy().GetNumInfantry();
 	std::vector<Unit> playerInfantry = FillLine(numPlayerInfantry, 0, INFANTRY);
 	int numPlayerArchers = GetPlayer().GetArmy().GetNumArchers();
@@ -157,11 +206,24 @@ void Battle::Start() {
 	int numPlayerCavalry = GetPlayer().GetArmy().GetNumCavalry();
 	std::vector<Unit> playerCavalry = FillLine(numPlayerCavalry, 2, CAVALRY);
 	
+	for (auto &unit : playerInfantry) {
+		unit.SetHostile(false);
+	}
+
+	for (auto &unit : playerArchers) {
+		unit.SetHostile(false);
+	}
+
+	for (auto &unit : playerCavalry) {
+		unit.SetHostile(false);
+	}
+
 	this->opponentForceOffset_ = CalculateLargestGroup(oppInfantry, oppArchers, oppCavalry);
 	this->playerForceOffset_ = CalculateLargestGroup(playerInfantry, playerArchers, playerCavalry);
 	BuildFormation(false, oppInfantry, oppArchers, oppCavalry);
 	std::cout << std::endl << std::endl;
 	BuildFormation(true, playerInfantry, playerArchers, playerCavalry);
+	HandleCommand();
 }
 
 Commander Battle::GetPlayer() const {

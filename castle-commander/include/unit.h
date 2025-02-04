@@ -9,11 +9,13 @@ public:
 	int GetRow() const;
 	int GetCol() const;
 	UnitType GetType() const;
-
+	void SetHostile(bool isHostile);
+	bool IsHostile() const;
 private:
 	int row_;
 	int col_;
 	UnitType type_;
+	bool isHostile_;
 };
 
 #endif

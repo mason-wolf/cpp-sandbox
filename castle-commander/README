@@ -15,13 +15,21 @@ o o o o o o o o o o o		@ = Calvary
 3. Retreat
 
 ** Depending on who is on the front line will determine effectiveness.
-If infantry sent to calvary line, less effective.
-If archers fire on calvary line, more effective.
-If calvary line sent to calvary line, even odds.
+
+** Infantry **
+If infantry sent to cavalry line, more effective.
 If infantry sent to infantry line, even odds.
-If infantry sent to archer lines, more effective.
-If calvary sent to archer lines, more effective.
-If calvary sent to infantry lines, more effective.
+If infantry set to archer lines, more effective.
+
+** Archers ** 
+If archers fire on cavalry line, less effective.
+If archers fire on archer line, even odds.
+If archers fire on infantry line, more effective.
+
+** Cavalry **
+If cavalry sent to cavalry line, even odds.
+If cavalry sent to infantry lines, less effective.
+If cavalry sent to archer lines, more effective.
 
 Todos:
 ======================================================================

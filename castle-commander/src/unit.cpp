@@ -13,3 +13,11 @@ int Unit::GetCol() const {
 UnitType Unit::GetType() const {
 	return type_;
 }
+
+void Unit::SetHostile(bool isHostile) {
+	this->isHostile_ = isHostile;
+}
+
+bool Unit::IsHostile() const {
+	return this->isHostile_;
+}
