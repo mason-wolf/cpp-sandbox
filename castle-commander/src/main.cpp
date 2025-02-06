@@ -24,6 +24,9 @@ int main() {
 	opponentArmy.SetNumInfantry(GenerateRandom(8, 40));
 	opponentArmy.SetNumArchers(GenerateRandom(8, 40));
 	opponentArmy.SetNumCavalry(GenerateRandom(8, 40));
+	opponentArmy.SetTrainingLevel(GenerateRandom(1, 100));
+	opponentArmy.SetEquipmentLevel(GenerateRandom(1, 100));
+	opponentArmy.SetMoraleLevel(GenerateRandom(1, 100));
 	
 	Commander player;
 	player.SetArmy(playerArmy);

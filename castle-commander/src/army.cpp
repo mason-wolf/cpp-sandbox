@@ -47,3 +47,27 @@ void Army::SetCavalry(const std::vector<Unit>& cavalry) {
 const std::vector<Unit>& Army::GetCavalry() const {
 	return cavalryGroup_;
 }
+
+void Army::SetTrainingLevel(const double trainingLevel) {
+	trainingLevel_ = trainingLevel;
+}
+
+double Army::GetTrainingLevel() const {
+	return trainingLevel_;
+}
+
+void Army::SetEquipmentLevel(const double equipmentLevel) {
+	equipmentLevel_ = equipmentLevel;
+}
+
+double Army::GetEquipmentLevel() const {
+	return equipmentLevel_;
+}
+
+void Army::SetMoraleLevel(const double moraleLevel) {
+	moraleLevel_ = moraleLevel;
+}
+
+double Army::GetMoraleLevel() const {
+	return moraleLevel_;
+}

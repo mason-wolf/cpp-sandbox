@@ -17,6 +17,15 @@ public:
 	void SetCavalry(const std::vector<Unit>& cavalry);
 	void SetArchers(const std::vector<Unit>& archers);
 
+	void SetTrainingLevel(const double trainingLevel);
+	double GetTrainingLevel() const;
+
+	void SetEquipmentLevel(const double equipmentLevel);
+	double GetEquipmentLevel() const;
+
+	void SetMoraleLevel(const double moraleLevel);
+	double GetMoraleLevel() const;
+
 	const std::vector<Unit>& GetInfantry() const;
 	const std::vector<Unit>& GetCavalry() const;
 	const std::vector<Unit>& GetArchers() const;
@@ -30,6 +39,9 @@ private:
 	std::vector<Unit> cavalryGroup_;
 	std::vector<Unit> archerGroup_;
 
+	double trainingLevel_;
+	double equipmentLevel_;
+	double moraleLevel_;
 };
 
 #endif

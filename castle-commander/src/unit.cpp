@@ -21,3 +21,27 @@ void Unit::SetHostile(bool isHostile) {
 bool Unit::IsHostile() const {
 	return this->isHostile_;
 }
+
+double Unit::GetTrainingLevel() const {
+	return this->trainingLevel_;
+}
+
+void Unit::SetTrainingLevel(double trainingLevel) {
+	trainingLevel_ = trainingLevel;
+}
+
+double Unit::GetEquipmentLevel() const {
+	return this->equipmentLevel_;
+}
+
+void Unit::SetEquipmentLevel(double equipmentLevel) {
+	equipmentLevel_ = equipmentLevel;
+}
+
+double Unit::GetMoraleLevel() const {
+	return this->moraleLevel_;
+}
+
+void Unit::SetMoraleLevel(double moraleLevel) {
+	moraleLevel_ = moraleLevel;
+}

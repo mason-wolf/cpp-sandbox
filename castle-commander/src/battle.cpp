@@ -12,7 +12,7 @@ int DEFAULT_ROW_OFFSET = 25;
 int playerActiveRow = 0;
 
 Battle::Battle() {
-	orderMap[1] = std::unique_ptr<Order>(new AutoBattleOrder());
+//	orderMap[1] = std::unique_ptr<Order>(new AutoBattleOrder(nullptr));
 }
 
 std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
@@ -26,7 +26,8 @@ std::vector<Unit> Battle::FillLine(int size, int row, UnitType unitType) {
 
 void Battle::HandleCommand() {
 	std::string userInput;
-	
+
+	orderMap[1] = std::unique_ptr<Order>(new AutoBattleOrder(GetOpponent().GetArmy()));
 	while(true) {
 		std::cout << "1. Auto Battle" << std::endl; 
 		std::cout << "2. Order Infantry Forward" << std::endl;
