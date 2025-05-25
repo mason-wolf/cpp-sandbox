@@ -1,0 +1,19 @@
+Auto Battle Mechanics:
+
+Infantryman xyz killed archer xyz.
+Calvaryman was injured by xzy.
+
+Unit type and name colored by player colors.
+
+------------------------------------------------------------------------------
+
+Gold awarded for winning battles.
+Must manage/equip troops with armor and weapons.
+Must manage troop payment.
+Equipment/training and morale determine lethality.
+
+Travel to locations:
+    1. Loc 1
+    2. Loc 2
+
+Gather reports on enemy movements.

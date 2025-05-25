@@ -7,7 +7,7 @@ AutoBattleOrder::AutoBattleOrder(const Army& opponentArmy)
 	: opponentArmy(opponentArmy) {}
 
 void AutoBattleOrder::Execute() {
-	std::cout << opponentArmy.GetInfantry().size() << std::endl;
+	std::cout << "Army Infantry Size: " << opponentArmy.GetInfantry().size() << std::endl;
 	
 	double trainingLevel = opponentArmy.GetTrainingLevel();
 	double equipmentLevel = opponentArmy.GetEquipmentLevel();

@@ -28,12 +28,10 @@ void Battle::HandleCommand() {
 	std::string userInput;
 
 	orderMap[1] = std::unique_ptr<Order>(new AutoBattleOrder(GetOpponent().GetArmy()));
+
 	while(true) {
-		std::cout << "1. Auto Battle" << std::endl; 
-		std::cout << "2. Order Infantry Forward" << std::endl;
-		std::cout << "3. Order Archers Forward" << std::endl;
-		std::cout << "4. Order Cavalry Forward" << std::endl;
-		std::cout << "5. Retreat" << std::endl;
+		std::cout << "1. Battle" << std::endl; 
+		std::cout << "2. Retreat" << std::endl;
 		std::cout << "> ";
 		std::getline(std::cin, userInput);
 
@@ -73,10 +71,10 @@ void Battle::PopulateUnits(const std::vector<Unit>& units, int row, int col) {
 			}
 			else if (units[i].GetType() == ARCHERS) {
 				if (units[i].IsHostile()) {
-					std::cout << "\033[1;31m" << "\u2193" << "\33[0m";
+					std::cout << "\033[1;31m" << "v" << "\33[0m";
 				}
 				else {
-					std::cout << "\033[1;32m" << "\u2193" << "\033[0m";
+					std::cout << "\033[1;32m" << "v" << "\033[0m";
 				}
 			}
 			else if (units[i].GetType() == CAVALRY) {
