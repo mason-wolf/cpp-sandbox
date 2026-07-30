@@ -3,5 +3,6 @@
 
 
 int main() {
-	std::cout << "Hello world!";
+	std::string greeting = "Hello world!";
+	std::cout << "Hello world! " << greeting << std::endl;
 }
