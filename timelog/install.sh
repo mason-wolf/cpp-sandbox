@@ -1,0 +1,1 @@
+sudo cp timelog /usr/local/bin/timelog
